@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="6" author="Praveen">
+        <createTable tableName="users_privileges">
+            <column name="user_id" type="int">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name="privilege_id" type="int">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="users_privileges"></dropTable>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="16" author="Praveen">
+        <addForeignKeyConstraint baseTableName="users_privileges" baseColumnNames="user_id"
+                                 constraintName="fk_users_privileges_user_id_users_id" referencedTableName="users"
+                                 referencedColumnNames="id"></addForeignKeyConstraint>
+    </changeSet>
+    <changeSet id="17" author="Praveen">
+        <addForeignKeyConstraint baseTableName="users_privileges" baseColumnNames="privilege_id"
+                                 constraintName="fk_users_privileges_privilege_id_privileges_id"
+                                 referencedTableName="privileges"
+                                 referencedColumnNames="id"></addForeignKeyConstraint>
+    </changeSet>
+
+</databaseChangeLog>

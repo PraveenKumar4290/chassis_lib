@@ -1,0 +1,42 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="2" author="Praveen">
+        <createTable tableName="privileges">
+            <column name="id" type="int" autoIncrement="true" startWith="1" incrementBy="1">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="description" type="varchar(150)"></column>
+            <column name="parent_id" type="int">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name="code" type="varchar(50)">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="privileges"></dropTable>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="10" author="Praveen">
+        <addForeignKeyConstraint baseTableName="privileges" baseColumnNames="parent_id"
+                                 constraintName="fk_privileges_id_privileges_parent_id" referencedTableName="privileges"
+                                 referencedColumnNames="id" onDelete="CASCADE"></addForeignKeyConstraint>
+    </changeSet>
+
+    <changeSet id="16" author="Praveen">
+        <addColumn tableName="privileges">
+            <column name="status" type="boolean" defaultValue="false">
+                <constraints nullable="true" ></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

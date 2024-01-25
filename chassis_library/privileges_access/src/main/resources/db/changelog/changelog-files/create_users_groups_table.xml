@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="5" author="Praveen">
+        <createTable tableName="users_groups">
+            <column name="user_id" type="int">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="group_id" type="int">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="users_groups"></dropTable>
+        </rollback>
+    </changeSet>
+
+
+    <changeSet id="13" author="Praveen">
+        <addForeignKeyConstraint baseTableName="users_groups" baseColumnNames="user_id"
+                                 constraintName="fk_id_users_groups_user_id" referencedTableName="users"
+                                 referencedColumnNames="id" onDelete="CASCADE"></addForeignKeyConstraint>
+    </changeSet>
+    <changeSet id="14" author="Praveen">
+        <addForeignKeyConstraint baseTableName="users_groups" baseColumnNames="group_id"
+                                 constraintName="fk_id_users_groups_group_id" referencedTableName="groups"
+                                 referencedColumnNames="id" onDelete="CASCADE"></addForeignKeyConstraint>
+    </changeSet>
+</databaseChangeLog>

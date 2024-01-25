@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="1" author="Praveen">
+        <createTable tableName="groups">
+            <column name="id" type="int" autoIncrement="true" startWith="1" incrementBy="1">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="description" type="varchar(150)"></column>
+            <column name="created_by" type="varchar(30)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="updated_by" type="varchar(30)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="deleted_at" type="timestamp">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name="status" type="boolean">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="groups"></dropTable>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
